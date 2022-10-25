@@ -7,7 +7,6 @@ function Login() {
   
   const { setUser } = useContext(AuthContext)
 const token = JSON.parse(localStorage.getItem("user"))
-console.log(token,'tttttok');
   useEffect(()=>{
     if(token){
       navigate('/')
@@ -18,6 +17,7 @@ console.log(token,'tttttok');
   const [login,setLogin] = useState({})
  const [invalid,setInavlid] = useState("")
  console.log(invalid,'999');
+
   const handleChange = (e)=>{
     setLogin({...login, [e.target.name]: e.target.value})
   }
@@ -39,7 +39,6 @@ console.log(token,'tttttok');
           navigate('/login')              
           }
     }).catch((err)=>{
-       
       console.log(err,'asasasa');
     })
   }

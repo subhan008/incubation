@@ -1,4 +1,5 @@
+require('dotenv').config()
 module.exports = {
     database:
-      'mongodb+srv://subhan:123@cluster0.ltfleae.mongodb.net/Incubation?retryWrites=true&w=majority',
+      `mongodb+srv://subhan:${process.env.MONGODB_KEY}@cluster0.ltfleae.mongodb.net/Incubation?retryWrites=true&w=majority`,
   };   
