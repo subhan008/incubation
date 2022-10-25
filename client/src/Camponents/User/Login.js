@@ -33,11 +33,11 @@ console.log(token,'tttttok');
           localStorage.setItem("user", JSON.stringify(res.data.user));
           navigate('/')    
          } 
-          if(res.data.invalid)
+          if(res.data.invalid){
           console.log('sasasa');
            setInavlid(res.data.message)
           navigate('/login')              
-        
+          }
     }).catch((err)=>{
        
       console.log(err,'asasasa');

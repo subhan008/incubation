@@ -33,6 +33,7 @@ router.post('/login',(req,res)=>{
      console.log(token,'////');
       return res.status(201).send({token: token,message:"User logined successfully",user})
     } else{ 
+      console.log('sasasa');
      return res.send({message:"user login failed",invalid:true})          
     }
   })
