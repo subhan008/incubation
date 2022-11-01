@@ -14,7 +14,6 @@ const handleChange = (e)=>{
   
   setSignup({ ...signup, [e.target.name]: e.target.value })
 }
-
 console.log(signup);
 
   const handleSubmit = (e)=>{

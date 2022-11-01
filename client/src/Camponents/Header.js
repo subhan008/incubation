@@ -12,7 +12,7 @@ function Header() {
   if(user === undefined && localStorage!==null){
     console.log('aaaakkkk');
     setUser(localUser)  
-  }
+  }  
   const handleLogout = ()=>{
     setUser()
      localStorage.removeItem("user")
@@ -28,8 +28,6 @@ function Header() {
       { user? <h1 className="float-right mr-20 text-2xl font-light">Welcome {user.fname}</h1>  : 
       <button className="float-right" onClick={()=>navigate('/login')}><h1  className=" mr-10 text-2xl font-light">Login</h1></button>  
       }
-       
-       
       </nav>
     
   )

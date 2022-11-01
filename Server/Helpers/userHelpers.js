@@ -1,6 +1,6 @@
 const schema = require('../dbSchema/userSchema')
 const bcrypt = require('bcrypt')
-
+console.log(schema.application());
 module.exports = {
 
   doSignup:(data)=>{
@@ -20,12 +20,12 @@ module.exports = {
          schema.userData(data).save();
         console.log('user added');
         resolve({userAdded:true})
-      } 
+      }            
     })
  },
 
  doLogin:(data)=>{
-   console.log();
+   
   return new Promise( async(resolve,reject)=>{
     let response = {}
    let user = await schema.userData.findOne({
@@ -51,7 +51,14 @@ module.exports = {
   }
  })
 },
+ application:(formData)=>{
+  console.log(formData);
+   return new Promise((resolve,reject)=>{
+      schema.application(formData).save()
+      console.log('form inserted succesfuly');
+      resolve()
+   })
+ }
 }
-
 
 

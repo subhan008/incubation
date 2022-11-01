@@ -1,9 +1,14 @@
 import Home from "./Pages/Home";
-import Dashboard from "./Pages/Dashboard";
+import ApplicationList from "./Camponents/Admin/Application-list";
 import Login from "./Camponents/User/Login";
 import Signup from "./Camponents/User/Signup";
-
+import Application from "./Camponents/User/Application";
+import AdminLogin from "./Camponents/Admin/Login";
 import {BrowserRouter, Routes,Route } from "react-router-dom";
+import RecordTrack from "./Camponents/Admin/RecordTrack";
+import BookingSlot from "./Camponents/Admin/BookingSlot";
+
+import PrivateRoute from "./Camponents/PrivateRoute";
 import './App.css';
 
 function App() {
@@ -11,20 +16,20 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-        <Route >
-          <Route path='/' element={<Home/>}/>
-        </Route> 
+        <Route path='/' element={<Home/>}/>
 
-        <Route >
         <Route path='/login' element={<Login/>}/>
-        </Route>
-
-        <Route >
-          <Route path='/signup' element={<Signup/>}/>
-        </Route>
-
-        <Route >
-          <Route path='/admin' element={<Dashboard/>}/>
+        
+        <Route path='/signup' element={<Signup/>}/>
+        
+        <Route path='/slotbooking' element={<Application/>}/> 
+    
+        <Route path="/admin/login" element={ <AdminLogin /> } />
+        <Route element={ <PrivateRoute/> }>
+          <Route path='/admin' element={<ApplicationList/>}/>  
+           <Route path='/record-track' element={<RecordTrack/> }/>
+           <Route path='/booking-slot' element={<BookingSlot/> }/>
+  
         </Route>
       </Routes>
       </BrowserRouter>

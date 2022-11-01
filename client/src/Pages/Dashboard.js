@@ -1,5 +1,5 @@
 import React from 'react'
-import SideBar from "../Camponents/SideBar";
+import SideBar from "../Camponents/Admin/SideBar";
 import Header from "../Camponents/Header";
 import Applicationlist from "../Camponents/Admin/Application-list";
 function Dashboard() {

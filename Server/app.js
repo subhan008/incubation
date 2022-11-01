@@ -4,8 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config = require('./config/connection');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/user');
+var usersRouter = require('./routes/admin');
 var mongoose = require('mongoose')
 var app = express();
 const cors = require('cors')
@@ -28,7 +28,7 @@ else{
 console.log("database connection error");
 }
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,57 +1,139 @@
-import React from 'react'
-import Navbar from "./Header";   
+import React,{useState} from 'react'
+import Header from "../Header";   
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+
 function Application() {
-  const    handleSubmit = ()=>{
-    
-  }
+    const navigate = useNavigate()
+    const formValues = {
+        name: "",
+        address: "",
+        city: "",
+        state: "",
+        email: "",
+        phone: "",
+        companyName: "",
+        DescribeYourTeamAndBackground: "",
+        DescribeYourCompanyAndProducts: "",
+        DescribeTheProblem: "",
+        WhatsUniqe: "",
+    }
+const user = localStorage.getItem('user')
+console.log(user,'lll');
+const [formData,setFormData] = useState(formValues);   
+if(!user){
+    navigate('/login')
+}
+console.log(formData,'888');
+const handleChange = (e)=>{
+   setFormData({...formData,[e.target.name]:e.target.value})  
+}
+
+const onSubmit = (e)=>{
+    e.preventDefault()
+
+   axios.post('http://localhost:8000/slotbooking',formData).then((res)=>{
+    console.log(res);
+    console.log('form Submited succesfully');
+      navigate('/')
+   })
+}
+
+
   return (
-    <Navbar />
+    <>
+    <Header />
     <section className="h-full w-full flex   justify-center">
-    <form class="w-full max-w-lg mt-32">
+    <form class="w-full max-w-lg mt-32 pb-64">
         <h1 className="mb-10 font-normal text-slate-500 text-4xl">Signup</h1>
-  <div class="flex flex-wrap -mx-3 mb-6 ">
+    <div class="flex flex-wrap -mx-3 mb-6 ">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-        First Name
+        Name
       </label>
-      <input required class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" name="fname" 
-       type="text" placeholder="Jane"/>
+      <input onChange={handleChange} required class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" name="name" 
+       type="text" placeholder=""/>  
       {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-        Last Name
+        Email
       </label>
-      <input  required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="lname" id="grid-last-name" type="text" placeholder="Doe"/>
+      <input onChange={handleChange}  required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="email" id="grid-last-name" type="text" placeholder=""/>
+    </div>
+  </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+        Address
+      </label>
+      <input onChange={handleChange} required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="address" id="grid-password" type="text" placeholder="Address"/>
     </div>
   </div>
   <div class="flex flex-wrap -mx-3 mb-6 ">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-        Email
+        Company Name
       </label>
-      <input  required class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" name="email" type="text" placeholder="@gmail.com"/>
+      <input onChange={handleChange}  required class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" name="companyName" type="text" placeholder=""/>
       <p class="text-red-500 text-xs italic"></p>
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
         Phone Number
       </label>
-      <input  required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="mobile" id="grid-last-name" type="text" placeholder="Number"/>
+      <input onChange={handleChange} required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="phone" id="grid-last-name" type="text" placeholder="Number"/>
     </div>
   </div>
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-        Password
+  <div class="flex flex-wrap -mx-3 mb-6 ">
+    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        City Name
       </label>
-      <input required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="password" id="grid-password" type="password" placeholder="******************"/>
-      <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+      <input onChange={handleChange} required class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" name="city" type="text" placeholder=""/>
+      <p class="text-red-500 text-xs italic"></p>
+    </div>
+    <div class="w-full md:w-1/2 px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+        State
+      </label>
+      <input onChange={handleChange} required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="state" id="grid-last-name" type="text" placeholder=""/>
+    </div>
+  </div>
+ <div class="">
+    <div class="w-full ">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+      Describe Your Team And Background
+      </label>
+      <textarea name="DescribeYourTeamAndBackground" onChange={handleChange} style={{height:"100px"}} class="txt-area appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded h-2/5	 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+  <div class=" ">
+    <div class="w-full ">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+    Describe Your Company And Products      </label>
+      <textarea onChange={handleChange} style={{height:"100px"}} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded h-2/5	 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="DescribeYourCompanyAndProducts" id="" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+  <div class="">
+    <div class="w-full ">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+      Describe The Problem
+      </label>
+      <textarea onChange={handleChange} style={{height:"100px"}} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded h-2/5	 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="DescribeTheProblem" id="" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+  <div class="">
+    <div class="w-full">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+      Whats Uniqe
+      </label>
+      <textarea onChange={handleChange} style={{height:"100px"}} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded h-2/5	 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="WhatsUniqe" id="" cols="30" rows="10"></textarea>
     </div>
   </div>
   <div class="flex flex-wrap justify-center -mx-3 mb-2">
      <button type="submit" className="py-3 bg-green-500 hover:bg-green-600 rounded text-white text-center w-2/4"
-     onClick={handleSubmit} >Submit</button>
+     onClick={onSubmit} >Submit</button>
     {/* <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
         State
@@ -70,6 +152,7 @@ function Application() {
   </div>
 </form>
 </section>
+</>
   )
 }
 
